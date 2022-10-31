@@ -10,8 +10,8 @@
 
 var taskInput=document.getElementById("new-task");//Add a new task.
 var addButton=document.getElementsByTagName("button")[0];//first button
-var incompleteTaskHolder=document.getElementById("incompleteTasks");//ul of #incompleteTasks
-var completedTasksHolder=document.getElementById("completed-tasks");//completed-tasks
+var incompleteTaskHolder=document.querySelector(".todo__list");//ul of #incompleteTasks
+var completedTasksHolder=document.querySelector(".completed__list");//completed-tasks
 
 
 //New task list item
@@ -33,19 +33,22 @@ var createNewTaskElement=function(taskString){
   var deleteButtonImg=document.createElement("img");//delete button image
 
   label.innerText=taskString;
-  label.className='task';
+  label.className="item__label";
+
 
   //Each elements, needs appending
   checkBox.type="checkbox";
+  checkBox.classList.add("item__check");
   editInput.type="text";
-  editInput.className="task";
+  editInput.className="item__task";
 
   editButton.innerText="Edit"; //innerText encodes special characters, HTML does not.
-  editButton.className="edit";
+  editButton.className="edit item__btn";
 
-  deleteButton.className="delete";
+  deleteButton.className="delete item__btn";
   deleteButtonImg.src='./remove.svg';
   deleteButton.appendChild(deleteButtonImg);
+  deleteButtonImg.classList.add("item__btn_img")
 
 
   //and appending.
@@ -84,21 +87,21 @@ var editTask=function(){
   var editInput=listItem.querySelector('input[type=text]');
   var label=listItem.querySelector("label");
   var editBtn=listItem.querySelector(".edit");
-  var containsClass=listItem.classList.contains("editMode");
-  //If class of the parent is .editmode
+  var containsClass=listItem.classList.contains("todo__item_edit");
+  //If class of the parent is .todo__item_edit
   if(containsClass){
 
-    //switch to .editmode
+    //switch to .todo__item_edit
     //label becomes the inputs value.
     label.innerText=editInput.value;
     editBtn.innerText="Edit";
   }else{
     editInput.value=label.innerText;
-    editBtn.innerText="Save";
+      editBtn.innerText="Save";
   }
 
-  //toggle .editmode on the parent.
-  listItem.classList.toggle("editMode");
+  //toggle .todo__item_edit on the parent.
+  listItem.classList.toggle("todo__item_edit");
 };
 
 
