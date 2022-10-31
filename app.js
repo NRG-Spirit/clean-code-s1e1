@@ -34,6 +34,9 @@ var createNewTaskElement=function(taskString){
 
   label.innerText=taskString;
   label.className="item__label";
+  
+  listItem.classList.add("item");
+  listItem.classList.add("todo__item");
 
 
   //Each elements, needs appending
